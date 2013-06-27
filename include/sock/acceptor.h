@@ -28,9 +28,7 @@ namespace sock {
 		Acceptor() : Sock() {}
 		Acceptor(NetworkInfo* _info) : Sock(_info) {}
 		Acceptor(sockaddr_in* _addr) : Sock(_addr) {}
-		Acceptor(Socket _sock, sockaddr_in* _addr) : Sock(_addr) {
-			m_listen = _sock;
-		}
+		Acceptor(Socket _sock, sockaddr_in* _addr) : Sock(_addr), m_listen(_sock) {}
 		bool active();
 		bool inactive();
 	protected:

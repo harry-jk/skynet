@@ -28,8 +28,8 @@ namespace sock {
 		Listener() : Binder() {}
 		Listener(NetworkInfo* _info) : Binder(_info) {}
 		Listener(sockaddr_in* _addr) : Binder(_addr) {}
-		bool active();
-		bool inactive();
+		bool active() override;
+		bool inactive() override;
 	protected:
 	private:
 	};

@@ -28,8 +28,8 @@ namespace sock {
 		Connector() : Sock() {}
 		Connector(NetworkInfo* _info) : Sock(_info) {}
 		Connector(sockaddr_in* _addr) : Sock(_addr) {}
-		bool active();
-		bool inactive();
+		bool active() override;
+		bool inactive() override;
 	protected:
 	private:	
 	};

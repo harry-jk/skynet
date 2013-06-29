@@ -28,8 +28,8 @@ namespace sock {
 		Binder() : Sock() {}
 		Binder(NetworkInfo* _info) : Sock(_info) {}
 		Binder(sockaddr_in* _addr) : Sock(_addr) {}
-		virtual bool active();
-		virtual bool inactive();
+		virtual bool active() override;
+		virtual bool inactive() override;
 	protected:
 	private:
 	};

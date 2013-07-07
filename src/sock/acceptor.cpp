@@ -19,15 +19,15 @@
 
 namespace skynet {
 namespace sock {
-	bool Acceptor::active()
+	const bool Acceptor::active()
 	{
-		sockaddr_in* _addr = getAddr();
+		const struct sockaddr_in* _addr = getAddr();
 		socklen_t len = sizeof(struct sockaddr);
 		setSock(accept(m_listen, (struct sockaddr*) _addr, &len));
 		return getSock() != -1;
 	}
 
-	bool Acceptor::inactive()
+	const bool Acceptor::inactive()
 	{
 		return closeSock();
 	}

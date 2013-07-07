@@ -26,10 +26,10 @@ namespace sock {
 	{
 	public:
 		Binder() : Sock() {}
-		Binder(NetworkInfo* _info) : Sock(_info) {}
-		Binder(sockaddr_in* _addr) : Sock(_addr) {}
-		virtual bool active() override;
-		virtual bool inactive() override;
+		Binder(struct NetworkInfo* _info) : Sock(_info) {}
+		Binder(struct sockaddr_in* _addr) : Sock(_addr) {}
+		virtual const bool active() override;
+		virtual const bool inactive() override;
 	protected:
 	private:
 	};

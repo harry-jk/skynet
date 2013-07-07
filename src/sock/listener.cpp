@@ -19,7 +19,7 @@
 
 namespace skynet {
 namespace sock {
-	bool Listener::active()
+	const bool Listener::active()
 	{
 		bool isActive = Binder::active();
 		int _sock = getSock();
@@ -27,7 +27,7 @@ namespace sock {
 		return listen(_sock, 5) == 0;
 	}
 
-	bool Listener::inactive()
+	const bool Listener::inactive()
 	{
 		return closeSock();
 	}

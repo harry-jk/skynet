@@ -26,10 +26,10 @@ namespace sock {
 	{
 	public:
 		Listener() : Binder() {}
-		Listener(NetworkInfo* _info) : Binder(_info) {}
-		Listener(sockaddr_in* _addr) : Binder(_addr) {}
-		bool active() override;
-		bool inactive() override;
+		Listener(struct NetworkInfo* _info) : Binder(_info) {}
+		Listener(struct sockaddr_in* _addr) : Binder(_addr) {}
+		const bool active() override;
+		const bool inactive() override;
 	protected:
 	private:
 	};

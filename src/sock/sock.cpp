@@ -14,7 +14,8 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 */
-	
+#include <unistd.h>
+
 #include "sock/sock.h"
 
 namespace skynet {
@@ -24,11 +25,11 @@ namespace sock {
 		m_addr(nullptr)
 	{}
 
-	Sock::Sock(NetworkInfo* _info) :
+	Sock::Sock(struct NetworkInfo* _info) :
 		m_sock(-1),
 		m_addr(nullptr)
 	{
-		sockaddr_in* _addr = new sockaddr_in();
+		struct sockaddr_in* _addr = new struct sockaddr_in();
 		_addr->sin_family = AF_INET;
 		if(_info->addr == nullptr) {
 			_addr->sin_addr.s_addr = htonl(INADDR_ANY);
@@ -40,9 +41,9 @@ namespace sock {
 		setAddr(_addr);
 	}
 
-	Sock::Sock(sockaddr_in* _addr) :
+	Sock::Sock(struct sockaddr_in* _addr) :
 		m_sock(-1),
-		m_addr(std::unique_ptr<sockaddr_in>(_addr))
+		m_addr(std::unique_ptr<struct sockaddr_in>(_addr))
 	{}
 
 	Sock::~Sock()
@@ -54,7 +55,7 @@ namespace sock {
 		}
 	}
 
-	bool Sock::closeSock()
+	const bool Sock::closeSock()
 	{
 		if(m_sock == -1) return true;
 		return close(m_sock) == 0; 

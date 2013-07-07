@@ -26,10 +26,10 @@ namespace sock {
 	{
 	public:
 		Connector() : Sock() {}
-		Connector(NetworkInfo* _info) : Sock(_info) {}
-		Connector(sockaddr_in* _addr) : Sock(_addr) {}
-		bool active() override;
-		bool inactive() override;
+		Connector(struct NetworkInfo* _info) : Sock(_info) {}
+		Connector(struct sockaddr_in* _addr) : Sock(_addr) {}
+		const bool active() override;
+		const bool inactive() override;
 	protected:
 	private:	
 	};

@@ -26,11 +26,11 @@ namespace sock {
 	{
 	public:
 		Acceptor() : Sock() {}
-		Acceptor(NetworkInfo* _info) : Sock(_info) {}
-		Acceptor(sockaddr_in* _addr) : Sock(_addr) {}
-		Acceptor(Socket _sock, sockaddr_in* _addr) : Sock(_addr), m_listen(_sock) {}
-		bool active() override;
-		bool inactive() override;
+		Acceptor(struct NetworkInfo* _info) : Sock(_info) {}
+		Acceptor(struct sockaddr_in* _addr) : Sock(_addr) {}
+		Acceptor(Socket _sock, struct sockaddr_in* _addr) : Sock(_addr), m_listen(_sock) {}
+		const bool active() override;
+		const bool inactive() override;
 	protected:
 	private:
 		Socket m_listen;

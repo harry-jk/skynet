@@ -19,17 +19,17 @@
 
 namespace skynet {
 namespace sock {
-	bool Connector::active()
+	const bool Connector::active()
 	{
 		setSock();
 		int _sock = getSock();
-		sockaddr_in* _addr = getAddr();
-		socklen_t len = sizeof(*_addr);
-		int isConnect = connect(_sock, (sockaddr *) _addr, len);
+		const struct sockaddr_in* _addr = getAddr();
+		socklen_t len = sizeof(struct sockaddr);
+		int isConnect = connect(_sock, (struct sockaddr*) _addr, len);
 		return isConnect != -1;
 	}
 
-	bool Connector::inactive()
+	const bool Connector::inactive()
 	{
 		return closeSock();
 	}

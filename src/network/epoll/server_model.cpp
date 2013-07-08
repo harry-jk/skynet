@@ -83,8 +83,8 @@ namespace epoll {
 			disconect();
 		} else {
 			// TODO Linking Pipeline
-			std::cout << "Read Msg: " << buf << std::endl;
 		}
+		delete _msg;
 	}
 }
 }

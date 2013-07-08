@@ -52,6 +52,7 @@ namespace epoll {
 		} else {
 			// TODO Linking Pipeline
 		}
+		delete _msg;
 	}
 
 	void ClientModel::exception(const char* _exception)

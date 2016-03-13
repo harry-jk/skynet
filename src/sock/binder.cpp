@@ -18,17 +18,17 @@
 
 namespace skynet {
 namespace sock {
-	bool Binder::active()
+	const bool Binder::active()
 	{
 		setSock();
 		int _sock = getSock();
-		sockaddr_in* _addr = getAddr();
-		socklen_t len = sizeof(*_addr);
+		const struct sockaddr_in* _addr = getAddr();
+		socklen_t len = sizeof(struct sockaddr);
 		int isBind = bind(_sock, (struct sockaddr*) _addr, len);
 		return isBind != -1;
 	}
 
-	bool Binder::inactive()
+	const bool Binder::inactive()
 	{
 		return closeSock();
 	}

@@ -15,25 +15,32 @@
 	limitations under the License.
 */
 
-#ifndef _SKYNET_SOCK_ACCEPTOR_H_
-#define _SKYNET_SOCK_ACCEPTOR_H_
+#ifndef _SKYNET_MANAGER_NETWORK_BOOTSTRAP_H_
+#define _SKYNET_MANAGER_NETWORK_BOOTSTRAP_H_
 
-#include "sock/sock.h"
+#include <memory>
+
+#include "common/uncopyable.h"
+#include "common/network_info.h"
+#include "factory/network_factory.h"
+#include "service/service.h"
 
 namespace skynet {
-namespace sock {
-	class Acceptor : public Sock
+namespace bootstrap {
+	class ServiceBootstrap : private Uncopyable
 	{
 	public:
-		Acceptor() : Sock() {}
-		Acceptor(struct NetworkInfo* _info) : Sock(_info) {}
-		Acceptor(struct sockaddr_in* _addr) : Sock(_addr) {}
-		Acceptor(Socket _sock, struct sockaddr_in* _addr) : Sock(_addr), m_listen(_sock) {}
-		const bool active() override;
-		const bool inactive() override;
+		ServiceBootstrap(NetworkFactory* _factory, DefaultHandler* _handler);
+		virtual ~ServiceBootstrap();
+		virtual Service* build() = 0;
+		virtual void setPipeline();
+		virtual void addPipe();
+
 	protected:
+
 	private:
-		Socket m_listen;
+		std::unique_ptr<NetworkFactory> m_factory;
+		std::unique_ptr<DefaultHandler> m_handler;
 	};
 }
 }

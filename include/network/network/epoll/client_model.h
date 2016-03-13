@@ -15,26 +15,30 @@
 	limitations under the License.
 */
 
-#ifndef _SKYNET_SOCK_ACCEPTOR_H_
-#define _SKYNET_SOCK_ACCEPTOR_H_
+#ifndef _SKYNET_NETWORK_EPOLL_CLIENT_MODEL_H_
+#define _SKYNET_NETWORK_EPOLL_CLIENT_MODEL_H_
 
-#include "sock/sock.h"
+#include "network/network/base_model.h"
+#include "network/network/epoll/epoll_message.h"
+#include "sock/connector.h"
 
 namespace skynet {
-namespace sock {
-	class Acceptor : public Sock
+namespace network {
+namespace epoll {
+	class ClientModel : public BaseModel<struct EpollMessage>
 	{
 	public:
-		Acceptor() : Sock() {}
-		Acceptor(struct NetworkInfo* _info) : Sock(_info) {}
-		Acceptor(struct sockaddr_in* _addr) : Sock(_addr) {}
-		Acceptor(Socket _sock, struct sockaddr_in* _addr) : Sock(_addr), m_listen(_sock) {}
-		const bool active() override;
-		const bool inactive() override;
+		ClientModel(std::shared_ptr<sock::Connector> _sock, int _epoll, int _buf_size);
+		virtual ~ClientModel();
+		virtual void start() override;
+		virtual void stop() override;
+		virtual void recive(const struct EpollMessage* _msg) override;
+		virtual void exception(const char* _exception) override;
 	protected:
 	private:
-		Socket m_listen;
+		int m_epoll;
 	};
+}
 }
 }
 

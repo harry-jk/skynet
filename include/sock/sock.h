@@ -37,31 +37,31 @@ namespace sock {
 	public:
 		Sock();
 		// You must be construct NetworkInfo using 'new' 
-		Sock(NetworkInfo* _info);
+		Sock(struct NetworkInfo* _info);
 		// You must be construct sockaddr_in using 'new' 
-		Sock(sockaddr_in* _addr);
+		Sock(struct sockaddr_in* _addr);
 		virtual ~Sock();
 		inline Socket getSock(){ return m_sock; }
-		virtual bool active() = 0;
-		virtual bool inactive() = 0;
-		bool closeSock();
+		virtual const bool active() = 0;
+		virtual const bool inactive() = 0;
+		const bool closeSock();
 
 	protected:
-		bool setSock() {
+		const bool setSock() {
 			m_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 			return m_sock != -1;
 		}
 		inline void setSock(Socket _sock){ m_sock = _sock; }
 		// You must be construct sockaddr_in using 'new' 
-		inline void setAddr(sockaddr_in* _addr){ m_addr = std::unique_ptr<sockaddr_in>(_addr); }
+		inline void setAddr(struct sockaddr_in* _addr){ m_addr = std::unique_ptr<struct sockaddr_in>(_addr); }
 		// You must be construct NetworkInfo using 'new'
-		inline void setNetworkInfo(NetworkInfo* _info){ m_info = std::unique_ptr<NetworkInfo>(_info); }
-		inline sockaddr_in* getAddr(){ return m_addr.get(); }
+		inline void setNetworkInfo(struct NetworkInfo* _info){ m_info = std::unique_ptr<struct NetworkInfo>(_info); }
+		inline const struct sockaddr_in* getAddr(){ return m_addr.get(); }
 
 	private:
 		Socket m_sock;
-		std::unique_ptr<NetworkInfo> m_info;
-		std::unique_ptr<sockaddr_in> m_addr;
+		std::unique_ptr<struct NetworkInfo> m_info;
+		std::unique_ptr<struct sockaddr_in> m_addr;
 	};
 }
 }

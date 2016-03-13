@@ -15,27 +15,23 @@
 	limitations under the License.
 */
 
-#ifndef _SKYNET_SOCK_ACCEPTOR_H_
-#define _SKYNET_SOCK_ACCEPTOR_H_
+#ifndef _SKYNET_FACTORY_EPOLL_FACTORY_H_
+#define _SKYNET_FACTORY_EPOLL_FACTORY_H_
 
-#include "sock/sock.h"
+#include "controller/epoll_controller.h"
+#include "factory/network_factory.h"
 
 namespace skynet {
-namespace sock {
-	class Acceptor : public Sock
+namespace factory {
+	class EpollFactory : private NetworkFactory
 	{
 	public:
-		Acceptor() : Sock() {}
-		Acceptor(struct NetworkInfo* _info) : Sock(_info) {}
-		Acceptor(struct sockaddr_in* _addr) : Sock(_addr) {}
-		Acceptor(Socket _sock, struct sockaddr_in* _addr) : Sock(_addr), m_listen(_sock) {}
-		const bool active() override;
-		const bool inactive() override;
+		EpollController* build() override;
 	protected:
+
 	private:
-		Socket m_listen;
 	};
 }
 }
 
-#endif
+#endif	

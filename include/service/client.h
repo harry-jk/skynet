@@ -15,27 +15,30 @@
 	limitations under the License.
 */
 
-#ifndef _SKYNET_SOCK_ACCEPTOR_H_
-#define _SKYNET_SOCK_ACCEPTOR_H_
+#ifndef _SKYNET_SERVICE_SERVER_H_
+#define _SKYNET_SERVICE_SERVER_H_
 
-#include "sock/sock.h"
+#include "service/service.h"
 
 namespace skynet {
-namespace sock {
-	class Acceptor : public Sock
+	class Client : public Service
 	{
 	public:
-		Acceptor() : Sock() {}
-		Acceptor(struct NetworkInfo* _info) : Sock(_info) {}
-		Acceptor(struct sockaddr_in* _addr) : Sock(_addr) {}
-		Acceptor(Socket _sock, struct sockaddr_in* _addr) : Sock(_addr), m_listen(_sock) {}
-		const bool active() override;
-		const bool inactive() override;
+		inline bool start(){ return connect(); }
+		inline bool stop(){ return disconnect(); }
+		inline bool clear(){
+			if(stop()){
+				return close();
+			}
+			return false;
+		}
+		bool connect();
+		bool disconnect();
+		bool sendMsg(const char* _msg);
 	protected:
+		bool close();
 	private:
-		Socket m_listen;
 	};
-}
 }
 
 #endif

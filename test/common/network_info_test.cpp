@@ -15,27 +15,24 @@
 	limitations under the License.
 */
 
-#ifndef _SKYNET_SOCK_ACCEPTOR_H_
-#define _SKYNET_SOCK_ACCEPTOR_H_
+#include <iostream>
+#include "common/network_info.h"
 
-#include "sock/sock.h"
+using namespace std;
+using namespace skynet;
 
-namespace skynet {
-namespace sock {
-	class Acceptor : public Sock
-	{
-	public:
-		Acceptor() : Sock() {}
-		Acceptor(struct NetworkInfo* _info) : Sock(_info) {}
-		Acceptor(struct sockaddr_in* _addr) : Sock(_addr) {}
-		Acceptor(Socket _sock, struct sockaddr_in* _addr) : Sock(_addr), m_listen(_sock) {}
-		const bool active() override;
-		const bool inactive() override;
-	protected:
-	private:
-		Socket m_listen;
-	};
-}
+void printCase(NetworkInfo info, char* num);
+
+int main(int argc, char const *argv[])
+{
+	cout << "network info test case" << endl;
+	printCase(NetworkInfo("127.0.0.1", 80), "0");
+	return 0;
 }
 
-#endif
+void printCase(NetworkInfo info, char* num)
+{
+	cout << "case" << num << ": ";
+	cout << info.addr << ", ";
+	cout << info.port << endl;
+}

@@ -17,7 +17,6 @@
 
 #ifndef _SKYNET_NETWORK_BASE_NETWORK_H_
 #define _SKYNET_NETWORK_BASE_NETWORK_H_
-#include <iostream>
 #include <condition_variable>
 #include <memory>
 #include <mutex>
@@ -101,7 +100,6 @@ namespace network {
 		__isStop = true;
 		__isWait = false;
 		if(m_core.joinable()){
-			std::cout << "Join Thread" << std::endl;
 			m_core.join();
 		} 
 		getSock()->inactive(); // TODO Exception
@@ -129,7 +127,6 @@ namespace network {
 	void BaseNetwork<MESSAGE>::__core_wait_check(std::unique_lock<std::mutex>* _lock)
 	{
 		if(__isWait) {
-			std::cout << "Wait Network" << std::endl;
 			__core_wait.wait(*_lock);
 		}
 	}
@@ -137,7 +134,6 @@ namespace network {
 	template<class MESSAGE>
 	void BaseNetwork<MESSAGE>::__core()
 	{
-		std::cout << "Start Network" << std::endl;
 		__isRunning = true;
 		std::unique_lock<std::mutex> lock(__core_m);
 		while(!__isStop) {
@@ -146,7 +142,6 @@ namespace network {
 		}
 		__isStop = true;
 		__isRunning = false;
-		std::cout << "Stop Network" << std::endl;
 	}
 }
 }

@@ -35,7 +35,6 @@ namespace epoll {
 	void ServerModel::start()
 	{
 		COUNT = 0;
-		std::cout << "start" << std::endl;
 		// TODO Start Event
 	}
 
@@ -47,7 +46,6 @@ namespace epoll {
 
 	void ServerModel::recive(const struct EpollMessage* _msg)
 	{
-		std::cout << "recive" << std::endl;
 		if(_msg->fd == getSockFd()) {
 			listen(_msg);
 		} else {
@@ -85,8 +83,8 @@ namespace epoll {
 			disconect();
 		} else {
 			// TODO Linking Pipeline
-			std::cout << "Read Msg: " << buf << std::endl;
 		}
+		delete _msg;
 	}
 }
 }

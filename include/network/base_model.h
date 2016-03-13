@@ -17,7 +17,6 @@
 
 #ifndef _SKYNET_NETWORK_BASE_MODEL_H_
 #define _SKYNET_NETWORK_BASE_MODEL_H_
-#include <iostream>
 #include "network/base_message.h"
 #include "sock/sock.h"
 
@@ -38,11 +37,11 @@ namespace network {
 		virtual void exception(const char* _exception) = 0;
 		virtual void connect() final {
 			// TODO Connect Event
-			std::cout << "Connect" << ++COUNT << std::endl;
+			++COUNT;
 		}
 		virtual void disconect() final {
 			// TODO Disconnect Event
-			std::cout << "Disconnect" << --COUNT << std::endl;
+			--COUNT;
 		}
 	protected:
 		inline std::shared_ptr<sock::Sock> getSockPtr(){ return m_sock; }

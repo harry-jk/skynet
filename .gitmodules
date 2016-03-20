@@ -1,0 +1,6 @@
+[submodule "libs/asio"]
+	path = libs/asio
+	url = https://github.com/boostorg/asio.git
+[submodule "test/libs/gtest"]
+	path = test/libs/gtest
+	url = https://github.com/google/googletest.git
